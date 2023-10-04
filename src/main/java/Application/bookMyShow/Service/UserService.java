@@ -1,5 +1,6 @@
 package Application.bookMyShow.Service;
 
+import Application.bookMyShow.ConverterFunctions.UserConverter;
 import Application.bookMyShow.DTOs.UserEntryDTO;
 import Application.bookMyShow.Entity.UserEntity;
 import Application.bookMyShow.Repository.UserRepository;
@@ -8,24 +9,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-
     @Autowired
     UserRepository userRepository;
 
-    public void addUser(UserEntryDTO userEntryDTO){
-    // here we need to convert from DTO to object and save in DB - cause DTOs don't able to access the repo.
+    public String addUser(UserEntryDTO userEntryDTO) throws Exception, NullPointerException{
+/* here we need to convert from DTO to object and save in DB - cause DTOs don't able to access the repo.
+so we've created a converter function to do this work seperately.   */
 
-        // this is the convenient way to build the obj and save it
-        UserEntity userEntity = UserEntity.builder()
-                .mobNo(userEntryDTO.getMobNo())
-                .age(userEntryDTO.getAge())
-                .name(userEntryDTO.getName())
-                .address(userEntryDTO.getAddress())
-                .email(userEntryDTO.getEmail())
-                .build();
 
-        // this set's all the attributes in one go
+        // since it's static function so we'll call via class name
+        UserEntity userEntity = UserConverter.convertDtoToEntity(userEntryDTO);
         userRepository.save(userEntity);
-
+        return "User added successfully.";
     }
 }

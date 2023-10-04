@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class UserEntity {
-
+/* note : so when we're creating DTO so for that builder anotation is needed [@AllArgs constructor is mandatory for that]*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id;

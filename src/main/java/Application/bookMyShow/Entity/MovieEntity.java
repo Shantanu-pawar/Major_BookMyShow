@@ -3,6 +3,8 @@ package Application.bookMyShow.Entity;
 import Application.bookMyShow.Enums.Genre;
 import Application.bookMyShow.Enums.Language;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -11,6 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "movies")
 @Data
+@AllArgsConstructor
+@Builder
 public class MovieEntity {
 
     @Id

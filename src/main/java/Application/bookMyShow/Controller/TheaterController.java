@@ -1,8 +1,7 @@
 package Application.bookMyShow.Controller;
 
-import Application.bookMyShow.DTOs.UserEntryDTO;
-import Application.bookMyShow.Entity.UserEntity;
-import Application.bookMyShow.Service.UserService;
+import Application.bookMyShow.DTOs.TheaterEntryDTO;
+import Application.bookMyShow.Service.TheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,25 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
-
+@RequestMapping("/theater")
+public class TheaterController {
     @Autowired
-    UserService userService;
+    TheaterService theaterService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> addUser(@RequestBody UserEntryDTO userEntryDTO){
-
+    public ResponseEntity<String> addTheater(@RequestBody TheaterEntryDTO theaterEntryDTO){
         try {
-            String response = userService.addUser(userEntryDTO);
-            // so we'll get the response from service layer
+            String response = theaterService.addTheater(theaterEntryDTO);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         }
-
         catch (Exception e){
-            String result = "User could not be added";
+            String result = "While creating theter some problm occuring";
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
-
     }
 }
